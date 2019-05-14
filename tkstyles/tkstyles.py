@@ -120,24 +120,7 @@ class OptionMenu(tk.OptionMenu):
 class Popup(tk.Toplevel):
     def __init__(self, *args, **kwargs):
         tk.Toplevel.__init__(self, *args, **kwargs)
-        self.config(bg=background[theme])
-
-
-def popup(message):
-    pop = tk.Toplevel()
-    center_popup(pop, self)
-    pop.wm_title("Message")
-    pop.config(bg=background[theme], padx=25)
-
-    def close(self):
-        pop.destroy()
-
-    text = Label(pop, text=message)
-    okbtn = Button(pop, text="OK", width=20, command=lambda: close(pop))
-    text.pack()
-    okbtn.pack()
-    pop.bind('<Return>', close)
-    pop.focus()
+        self.config(bg=background[theme], padx=10, pady=10)
 
 
 def file_path(relative_path):
@@ -180,9 +163,9 @@ def clear(*args):
         arg.delete(0, tk.END)
 
 
-def clip(entry_widget):
-    self.clipboard_clear()
-    self.clipboard_append(entry_widget)
+def clip(main, cliptext):
+    tk.Tk.clipboard_clear(main)
+    tk.Tk.clipboard_append(main, cliptext)
 
 
 def set_theme(theme_name):
@@ -222,7 +205,8 @@ menu.add_separator()
 menu.add_command(label="Exit", command=sys.exit)
 app.config(menu=menubar)
 label = Label(frame, text="Labels look like this")
-button = Button(frame, text="This is a button", command=popuptest)
+button1 = Button(frame, text="Test Button 1", command=popuptest)
+button2 = Button(frame, text="clipboard copy", command=lambda: clip(app, entry.get()))
 text = Text(frame, width=20, height=2)
 text.insert("1.0", "This is a text widget")
 entry = Entry(frame, width=15)
@@ -233,7 +217,8 @@ optionmenu = OptionMenu(frame, variable, "one", "two", "three")
 
 frame.pack()
 label.pack()
-button.pack()
+button1.pack()
+button2.pack()
 text.pack()
 entry.pack()
 optionmenu.pack()
