@@ -4,8 +4,9 @@
 tkstyles is a small library designed to work with the native tkinter gui development library. The classes are all tkinter widgets with the ability to declare a theme.
 
   - import tkstyles (no need to import tkinter as well)
+  - set_theme("hufflepuff")
   - Declare, grid, and pack your widgets.
-  - Magic
+  - Magic.
 
 
 
