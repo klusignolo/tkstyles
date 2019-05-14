@@ -2,7 +2,7 @@ from distutils.core import setup
 setup(
   name = 'tkstyles',         # How you named your package folder (MyLib)
   packages = ['tkstyles'],   # Chose the same as "name"
-  version = '0.1.1',      # Start with a small number and increase it with every change you make
+  version = '0.1.5',      # Start with a small number and increase it with every change you make
   license='MIT',        # Chose a license from here: https://help.github.com/articles/licensing-a-repository
   description = 'A small library to apply basic styling to tkinter modules',   # Give a short description
   author = 'Kevin Lusignolo',                   # Type in your name
