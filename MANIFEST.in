@@ -1,5 +1,0 @@
-include license.txt
-include setup.cfg
-include tkstyles\__init__.py
-include setup.py
-include README.md
