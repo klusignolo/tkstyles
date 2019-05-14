@@ -118,7 +118,9 @@ class OptionMenu(tk.OptionMenu):
 
 
 class Popup(tk.Toplevel):
-    self.config(bg=background[theme])
+    def __init__(self, *args, **kwargs):
+        tk.Toplevel.__init__(self, *args, **kwargs)
+        self.config(bg=background[theme])
 
 
 def popup(message):
@@ -204,9 +206,11 @@ def set_theme(theme_name):
     if theme_name.lower() == 'ravenclaw':
         theme = 8
 
-
-"""
+'''
 #Display of all modules for theme building 
+def popuptest():
+    pop = Popup()
+    center_popup(pop, app)
 
 app = Main()
 frame = Frame(app)
@@ -218,7 +222,7 @@ menu.add_separator()
 menu.add_command(label="Exit", command=sys.exit)
 app.config(menu=menubar)
 label = Label(frame, text="Labels look like this")
-button = Button(frame, text="This is a button")
+button = Button(frame, text="This is a button", command=popuptest)
 text = Text(frame, width=20, height=2)
 text.insert("1.0", "This is a text widget")
 entry = Entry(frame, width=15)
@@ -235,4 +239,4 @@ entry.pack()
 optionmenu.pack()
 
 app.mainloop()
-"""
+'''
