@@ -13,24 +13,34 @@ theme = 2
 # 6: "Gryffindor"
 # 7: "Slytherin"
 # 8: "Ravenclaw"
+# 9: "Red"
+# 10: "Purple"
 # ********************************************************
 
 # The Main and Frame background.
-background = ["#f2fff9", "#191919", "#f2f7ff", "#ff3f79", "#fffef2", '#dcab20', '#5c0000', '#2a623d', '#222f5b']
+background = ["#f2fff9", "#191919", "#f2f7ff", "#ff3f79", "#fffef2", '#dcab20', '#5c0000', '#2a623d', '#222f5b',
+              "#fff2f2", "#eee5ff"]
 # The Button background.
-bbackground = ["#dcede0", "#232323", "#dce2ed", "#e81253", "#efe2d0", '#181818', '#fb8800', '#474747', '#946b2d']
+bbackground = ["#dcede0", "#232323", "#dce2ed", "#e81253", "#efe2d0", '#181818', '#fb8800', '#474747', '#946b2d',
+               "#ffd3d3", "#e7d3ff"]
 # The Button's Hover background
-hbackground = ['#23e046', '#0c0c0c', '#d8e8ff', "#ce002c", "#ffd52d", '#535353', '#fbb100', '#1a472a', '#9a610a']
+hbackground = ['#23e046', '#0c0c0c', '#d8e8ff', "#ce002c", "#ffd52d", '#535353', '#fbb100', '#1a472a', '#9a610a',
+               '#ffa3a3', '#ca96ff']
 # The Entry and Text background
-ebackground = ['#d9ffd8', '#474747', '#d8e8ff', "#fca9c2", "#fff7d8", "#feeb9f", '#ab4e4e', '#8ddaa7', '#a98957']
+ebackground = ['#d9ffd8', '#474747', '#d8e8ff', "#fca9c2", "#fff7d8", "#feeb9f", '#ab4e4e', '#8ddaa7', '#a98957',
+               '#ffd8d8', '#efd8ff']
 # The Disabled Entry background.
-dbackground = ['#d2efe4', '#0c0c0c', '#d9e9f9', "#e5d0d7", "#f2eede", "#fceaaa", '#936a6a', '#add0b9', '#ad9673']
+dbackground = ['#d2efe4', '#0c0c0c', '#d9e9f9', "#e5d0d7", "#f2eede", "#fceaaa", '#936a6a', '#add0b9', '#ad9673',
+               '#f9d9d9', '#eed9f9']
 # The default Font color
-fontcolor = ["#242624", "#efefef", "#242526", "#440014", "#262524", "#1c1c1c", '#d08400', '#000000', '#b8740e']
+fontcolor = ["#242624", "#efefef", "#242526", "#440014", "#262524", "#1c1c1c", '#d08400', '#000000', '#b8740e',
+             "#262424", "#262424"]
 # The default Button font color
-bfontcolor = ["#242624", "#efefef", "#242526", "#440014", "#262524", "#f0e095", '#3c0101', '#d3e4d3', '#08143a']
+bfontcolor = ["#242624", "#efefef", "#242526", "#440014", "#262524", "#f0e095", '#3c0101', '#d3e4d3', '#08143a',
+              "#262424", "#262424"]
 # The default Entry font color
-efontcolor = ["#242624", "#efefef", "#242526", "#440014", "#262524", "#1c1c1c", '#3c0101', '#000000', '#060c1f']
+efontcolor = ["#242624", "#efefef", "#242526", "#440014", "#262524", "#1c1c1c", '#3c0101', '#000000', '#060c1f',
+              "#262424", "#262424"]
 
 
 class Main(tk.Tk):
@@ -188,6 +198,11 @@ def set_theme(theme_name):
         theme = 7
     if theme_name.lower() == 'ravenclaw':
         theme = 8
+    if theme_name.lower() == 'red':
+        theme = 9
+    if theme_name.lower() == 'purple':
+        theme = 10
+
 
 '''
 #Display of all modules for theme building 
