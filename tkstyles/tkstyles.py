@@ -2,7 +2,7 @@ import tkinter as tk
 import sys
 import os
 
-theme = 2
+theme = 4
 # ********************** Theme Names *********************
 # 0: "Green"
 # 1: "Dark"
@@ -15,32 +15,36 @@ theme = 2
 # 8: "Ravenclaw"
 # 9: "Red"
 # 10: "Purple"
+# 11: "Gold"
+# 12: "HCSS"
+# 13: "Black and White"
+# 14: "Light"
 # ********************************************************
 
 # The Main and Frame background.
-background = ["#f2fff9", "#191919", "#f2f7ff", "#ff3f79", "#fffef2", '#dcab20', '#5c0000', '#2a623d', '#222f5b',
-              "#fff2f2", "#eee5ff"]
+background = ["#f2fff9", "#191919", "#5895fc", "#ff3f79", "#fffef2", '#dcab20', '#5c0000', '#2a623d', '#222f5b',
+              "#cf0202", "#b48efa", "#ffaf2d", "#117011", "#000000", "#ffffff"]
 # The Button background.
-bbackground = ["#dcede0", "#232323", "#dce2ed", "#e81253", "#efe2d0", '#181818', '#fb8800', '#474747', '#946b2d',
-               "#ffd3d3", "#e7d3ff"]
+bbackground = ["#dcede0", "#232323", "#2e62f2", "#e81253", "#efe2d0", '#181818', '#fb8800', '#474747', '#946b2d',
+               "#b30000", "#e7d3ff", "#ffb005", "#2f912f", "#ffffff", "#b3f2ff"]
 # The Button's Hover background
-hbackground = ['#23e046', '#0c0c0c', '#d8e8ff', "#ce002c", "#ffd52d", '#535353', '#fbb100', '#1a472a', '#9a610a',
-               '#ffa3a3', '#ca96ff']
+hbackground = ['#23e046', '#0c0c0c', '#023bd9', "#ce002c", "#ffd52d", '#535353', '#fbb100', '#1a472a', '#9a610a',
+               '#ed1818', '#9c38ff', "#ff9800", "#117011", "#ededed", "#d1f7ff"]
 # The Entry and Text background
-ebackground = ['#d9ffd8', '#474747', '#d8e8ff', "#fca9c2", "#fff7d8", "#feeb9f", '#ab4e4e', '#8ddaa7', '#a98957',
-               '#ffd8d8', '#efd8ff']
+ebackground = ['#d9ffd8', '#474747', '#5e89ff', "#fca9c2", "#fff7d8", "#feeb9f", '#ab4e4e', '#8ddaa7', '#a98957',
+               '#eb4444', '#d8a1ff', "#f7be4a", "#ffffff", "#ffffff", "#e0faff"]
 # The Disabled Entry background.
-dbackground = ['#d2efe4', '#0c0c0c', '#d9e9f9', "#e5d0d7", "#f2eede", "#fceaaa", '#936a6a', '#add0b9', '#ad9673',
-               '#f9d9d9', '#eed9f9']
+dbackground = ['#d2efe4', '#0c0c0c', '#b8c8f5', "#e5d0d7", "#f2eede", "#fceaaa", '#936a6a', '#add0b9', '#ad9673',
+               '#de9999', '#eed9f9', "#edc572", "#ffaf2d", "#117011", "#ffffff"]
 # The default Font color
-fontcolor = ["#242624", "#efefef", "#242526", "#440014", "#262524", "#1c1c1c", '#d08400', '#000000', '#b8740e',
-             "#262424", "#262424"]
+fontcolor = ["#242624", "#efefef", "#000000", "#440014", "#262524", "#1c1c1c", '#d08400', '#000000', '#b8740e',
+             "#000000", "#000000", "#4d2e00", "#ffffff", "#ffffff", "#000000"]
 # The default Button font color
-bfontcolor = ["#242624", "#efefef", "#242526", "#440014", "#262524", "#f0e095", '#3c0101', '#d3e4d3', '#08143a',
-              "#262424", "#262424"]
+bfontcolor = ["#242624", "#efefef", "#ffffff", "#440014", "#262524", "#f0e095", '#3c0101', '#d3e4d3', '#08143a',
+              "#000000", "#000000", "#4d2e00", "#ffffff", "#000000", "#000000"]
 # The default Entry font color
-efontcolor = ["#242624", "#efefef", "#242526", "#440014", "#262524", "#1c1c1c", '#3c0101', '#000000', '#060c1f',
-              "#262424", "#262424"]
+efontcolor = ["#242624", "#efefef", "#000000", "#440014", "#262524", "#1c1c1c", '#3c0101', '#000000', '#060c1f',
+              "#000000", "#000000", "#4d2e00", "#000000", "#000000", "#000000"]
 
 
 class Main(tk.Tk):
@@ -114,7 +118,7 @@ class Scrollbar(tk.Scrollbar):
 class Menu(tk.Menu):
     def __init__(self, master, **kwargs):
         tk.Menu.__init__(self, master=master, **kwargs)
-        self.configure(bg=ebackground[theme], fg=efontcolor[theme], activebackground=background[theme],
+        self.configure(bg=ebackground[theme], fg=efontcolor[theme], activebackground=hbackground[theme],
                        activeforeground=bfontcolor[theme])
 
 
