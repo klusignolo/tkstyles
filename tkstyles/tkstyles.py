@@ -206,6 +206,14 @@ def set_theme(theme_name):
         theme = 9
     if theme_name.lower() == 'purple':
         theme = 10
+    if theme_name.lower() == 'gold':
+        theme = 11
+    if theme_name.lower() == 'hcss':
+        theme = 12
+    if theme_name.lower() == 'black and white':
+        theme = 13
+    if theme_name.lower() == 'light':
+        theme = 14
 
 
 '''
