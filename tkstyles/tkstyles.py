@@ -109,6 +109,13 @@ class Radio(tk.Radiobutton):
                        selectcolor=ebackground[theme])
 
 
+class Checkbutton(tk.Checkbutton):
+    def __init__(self, master, **kwargs):
+        tk.Checkbutton.__init__(self, master=master, **kwargs)
+        self.configure(bg=background[theme], fg=fontcolor[theme], anchor='w',
+                       selectcolor=ebackground[theme])
+
+
 class Scrollbar(tk.Scrollbar):
     def __init__(self, master, **kwargs):
         tk.Scrollbar.__init__(self, master=master, **kwargs)
@@ -215,9 +222,8 @@ def set_theme(theme_name):
     if theme_name.lower() == 'light':
         theme = 14
 
-
 '''
-#Display of all modules for theme building 
+# Display of all modules for theme building
 def popuptest():
     pop = Popup()
     center_popup(pop, app)
@@ -241,6 +247,13 @@ entry.insert(0, "Entry")
 variable = tk.StringVar(app)
 variable.set("one")
 optionmenu = OptionMenu(frame, variable, "one", "two", "three")
+radiovar = tk.IntVar(value=1)
+radio1 = Radio(frame, text="Radio 1", value=1, variable=radiovar)
+radio2 = Radio(frame, text="Radio 2", value=2, variable=radiovar)
+checkvar1 = tk.IntVar()
+checkvar2 = tk.IntVar()
+check1 = Checkbutton(frame, text="Check 1", variable=checkvar1)
+check2 = Checkbutton(frame, text="Check 2", variable=checkvar2)
 
 frame.pack()
 label.pack()
@@ -249,6 +262,10 @@ button2.pack()
 text.pack()
 entry.pack()
 optionmenu.pack()
+radio1.pack()
+radio2.pack()
+check1.pack()
+check2.pack()
 
 app.mainloop()
 '''
