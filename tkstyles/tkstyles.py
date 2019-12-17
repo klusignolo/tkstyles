@@ -2,7 +2,8 @@ import tkinter as tk
 import sys
 import os
 
-theme = 4
+theme = 14
+
 # ********************** Theme Names *********************
 # 0: "Green"
 # 1: "Dark"
@@ -166,22 +167,49 @@ def center_popup(pop, parent):
     pop.geometry("+{}+{}".format(positionright, positiondown))
 
 
-def update(entry, value):
-    entry.delete(0, tk.END)
-    entry.insert(0, value)
+# Takes updates the widget's text to equal whatever Value is specified.
+def update(widget, value):
+    if isinstance(widget, Entry):
+        if widget.cget("state") == "disabled":
+            widget.config(state="normal")
+            widget.delete(0, tk.END)
+            widget.insert(0, value)
+            widget.config(state="disabled")
+        else:
+            widget.delete(0, tk.END)
+            widget.insert(0, value)
+    elif isinstance(widget, Text):
+        if widget.cget("state") == "disabled":
+            widget.config(state="normal")
+            widget.delete("1.0", tk.END)
+            widget.insert("1.0", value)
+            widget.config(state="disabled")
+        else:
+            widget.delete("1.0", tk.END)
+            widget.insert("1.0", value)
+    elif isinstance(widget, Label) or isinstance(widget, Button):
+        widget.config(text=value)
 
 
-# This Function Updates Entries that are disabled by activating them, running update, and disabling.
-def update_disabled(entry, value):
-    entry.config(state="normal")
-    update(entry, value)
-    entry.config(state="disabled")
+# Increments an Entry or Label widget by a designated amount. The value MUST be an integer.
+def increment(widget, amount):
+    if isinstance(widget, Entry):
+        new_entry = int(widget.get()) + amount
+        update(widget, str(new_entry))
+    elif isinstance(widget, Label):
+        new_label = int(widget.cget("text") + amount)
+        widget.configure(text=new_label)
 
 
 # This Function clears out a Tkinter Entry, but does not insert a new value.
-def clear(*args):
-    for arg in args:
-        arg.delete(0, tk.END)
+def clear(*widgets):
+    for widget in widgets:
+        if isinstance(widget, Entry):
+            widget.delete(0, tk.END)
+        elif isinstance(widget, Text):
+            widget.delete("1.0", tk.END)
+        elif isinstance(widget, Label):
+            widget.config(text='')
 
 
 def clip(main, cliptext):
@@ -221,6 +249,32 @@ def set_theme(theme_name):
         theme = 13
     if theme_name.lower() == 'light':
         theme = 14
+
+
+# Used for creating the .txt file that users can use to set their own theme.
+def create_theme():
+    exists = os.path.isfile((os.getcwd() + '\\theme.txt'))
+    if exists:
+        return
+    else:
+        themefile = open(os.getcwd() + '\\theme.txt', 'w')
+        themefile.write(THEME_INSTRUCTIONS)
+
+
+# Looks for theme.txt. If it finds it, applies the themes. If not, defaults to dark theme.
+def use_theme():
+    exists = os.path.isfile((os.getcwd() + '\\theme.txt'))
+    if exists:
+        global DEFAULT_FRAME
+        with open(os.getcwd() + '\\theme.txt') as themefile:
+            content = themefile.readlines()
+            set_theme(content[0].split(':')[1].strip(' ').strip('\n'))
+            DEFAULT_FRAME[0] = content[1].split(':')[1].strip(' ').strip('\n')
+            print(DEFAULT_FRAME)
+
+
+use_theme()
+
 
 '''
 # Display of all modules for theme building
