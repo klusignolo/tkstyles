@@ -38,7 +38,7 @@ ebackground = ['#d9ffd8', '#474747', '#5e89ff', "#fca9c2", "#fff7d8", "#feeb9f",
 dbackground = ['#d2efe4', '#0c0c0c', '#b8c8f5', "#e5d0d7", "#f2eede", "#fceaaa", '#936a6a', '#add0b9', '#ad9673',
                '#de9999', '#eed9f9', "#edc572", "#ededed", "#ededed", "#ffffff"]
 # The Radiobutton/Checkbox background
-rbackground = ['#d9ffd8', '#474747', '#5e89ff', "#fca9c2", "#fff7d8", "#feeb9f", '#ab4e4e', '#8ddaa7', '#a98957',
+rbackground = ['#d9ffd8', '#474747', '#5e89ff', "#fca9c2", "#fff7d8", "#feeb9f", '#ab4e4e', '#8ddaa7', '#ad9673',
                '#eb4444', '#d8a1ff', "#f7be4a", "#474747", "#474747", "#e0faff"]
 # The default Font color
 fontcolor = ["#242624", "#efefef", "#000000", "#440014", "#262524", "#1c1c1c", '#d08400', '#000000', '#b8740e',
@@ -252,31 +252,6 @@ def set_theme(theme_name):
         theme = 13
     if theme_name.lower() == 'light':
         theme = 14
-
-
-# Used for creating the .txt file that users can use to set their own theme.
-def create_theme():
-    exists = os.path.isfile((os.getcwd() + '\\theme.txt'))
-    if exists:
-        return
-    else:
-        themefile = open(os.getcwd() + '\\theme.txt', 'w')
-        themefile.write(THEME_INSTRUCTIONS)
-
-
-# Looks for theme.txt. If it finds it, applies the themes. If not, defaults to dark theme.
-def use_theme():
-    exists = os.path.isfile((os.getcwd() + '\\theme.txt'))
-    if exists:
-        global DEFAULT_FRAME
-        with open(os.getcwd() + '\\theme.txt') as themefile:
-            content = themefile.readlines()
-            set_theme(content[0].split(':')[1].strip(' ').strip('\n'))
-            DEFAULT_FRAME[0] = content[1].split(':')[1].strip(' ').strip('\n')
-            print(DEFAULT_FRAME)
-
-
-use_theme()
 
 
 '''
