@@ -36,7 +36,10 @@ ebackground = ['#d9ffd8', '#474747', '#5e89ff', "#fca9c2", "#fff7d8", "#feeb9f",
                '#eb4444', '#d8a1ff', "#f7be4a", "#ffffff", "#ffffff", "#e0faff"]
 # The Disabled Entry background.
 dbackground = ['#d2efe4', '#0c0c0c', '#b8c8f5', "#e5d0d7", "#f2eede", "#fceaaa", '#936a6a', '#add0b9', '#ad9673',
-               '#de9999', '#eed9f9', "#edc572", "#ffaf2d", "#117011", "#ffffff"]
+               '#de9999', '#eed9f9', "#edc572", "#ededed", "#ededed", "#ffffff"]
+# The Radiobutton/Checkbox background
+rbackground = ['#d9ffd8', '#474747', '#5e89ff', "#fca9c2", "#fff7d8", "#feeb9f", '#ab4e4e', '#8ddaa7', '#a98957',
+               '#eb4444', '#d8a1ff', "#f7be4a", "#474747", "#474747", "#e0faff"]
 # The default Font color
 fontcolor = ["#242624", "#efefef", "#000000", "#440014", "#262524", "#1c1c1c", '#d08400', '#000000', '#b8740e',
              "#000000", "#000000", "#4d2e00", "#ffffff", "#ffffff", "#000000"]
@@ -107,14 +110,14 @@ class Radio(tk.Radiobutton):
     def __init__(self, master, **kwargs):
         tk.Radiobutton.__init__(self, master=master, **kwargs)
         self.configure(bg=background[theme], fg=fontcolor[theme], anchor='w',
-                       selectcolor=ebackground[theme])
+                       selectcolor=rbackground[theme])
 
 
 class Checkbutton(tk.Checkbutton):
     def __init__(self, master, **kwargs):
         tk.Checkbutton.__init__(self, master=master, **kwargs)
         self.configure(bg=background[theme], fg=fontcolor[theme], anchor='w',
-                       selectcolor=ebackground[theme])
+                       selectcolor=rbackground[theme])
 
 
 class Scrollbar(tk.Scrollbar):
