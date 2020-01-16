@@ -63,7 +63,7 @@ class Main(tk.Tk):
 class Frame(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
-        Frame.configure(self, bg=background[theme], padx=5, pady=5)
+        Frame.configure(self, bg=background[theme])
 
 
 class Button(tk.Button):
