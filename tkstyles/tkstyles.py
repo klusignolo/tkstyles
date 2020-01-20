@@ -66,7 +66,7 @@ class Frame(tk.Frame):
         Frame.configure(self, bg=background[theme])
 
 
-class TopLevel(tk.Toplevel):
+class Toplevel(tk.Toplevel):
     def __init__(self):
         tk.Toplevel.__init__(self)
         self.configure(bg=background[theme])
