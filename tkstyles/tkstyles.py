@@ -66,6 +66,12 @@ class Frame(tk.Frame):
         Frame.configure(self, bg=background[theme])
 
 
+class TopLevel(tk.Toplevel):
+    def __init__(self):
+        tk.Toplevel.__init__(self)
+        self.configure(bg=background[theme])
+
+
 class Button(tk.Button):
     def __init__(self, master, **kwargs):
         tk.Button.__init__(self, master=master, **kwargs)
