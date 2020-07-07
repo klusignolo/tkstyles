@@ -174,6 +174,8 @@ class Image(tk.Label):
 
             try:
                 self.delay = im.info['duration']
+                if self.delay == 0:
+                    self.delay = 100
             except KeyError:
                 self.delay = 100
 
@@ -321,7 +323,6 @@ def popuptest():
     pop = Popup()
     center_popup(pop, app)
 
-
 app = Main()
 frame = Frame(app)
 menubar = Menu(app)
@@ -332,7 +333,7 @@ menu.add_separator()
 menu.add_command(label="Exit", command=sys.exit)
 app.config(menu=menubar)
 label = Label(frame, text="Labels look like this")
-gif = Image(frame, file_path('logo.png'), scale=.5)
+gif = Image(frame, file_path('doog.gif'), scale=.5)
 button1 = Button(frame, text="Test Button 1", command=popuptest)
 button2 = Button(frame, text="clipboard copy", command=gif.play)
 text = Text(frame, width=20, height=2)
