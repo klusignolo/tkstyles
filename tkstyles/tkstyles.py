@@ -1,6 +1,7 @@
 import tkinter as tk
 import sys
 import os
+from PIL import ImageTk, Image as pyImage
 
 theme = 14
 
@@ -154,6 +155,60 @@ class Popup(tk.Toplevel):
         self.config(bg=background[theme], padx=10, pady=10)
 
 
+# Credit to https://stackoverflow.com/questions/7960600/python-tkinter-display-animated-gif-using-pil
+# for the implementation of gifs in Tkinter.
+class Image(tk.Label):
+    def __init__(self, master, filename, scale=1.0, *args, **kwargs):
+        self.scale = scale
+        im = pyImage.open(filename)
+        split_file = filename.split('.')
+        file_extension = split_file[len(split_file)-1]
+        if file_extension == 'gif':
+            seq = []
+            try:
+                while 1:
+                    seq.append(self.scale_image(im.copy()))
+                    im.seek(len(seq))  # skip to next frame
+            except EOFError:
+                pass  # ran out of frames
+
+            try:
+                self.delay = im.info['duration']
+            except KeyError:
+                self.delay = 100
+
+            first = seq[0].convert('RGBA')
+            self.frames = [ImageTk.PhotoImage(first)]
+
+            tk.Label.__init__(self, master, image=self.frames[0], *args, **kwargs)
+
+            temp = seq[0]
+            for image in seq[1:]:
+                temp.paste(image)
+                frame = temp.convert('RGBA')
+                self.frames.append(ImageTk.PhotoImage(frame))
+
+            self.idx = 0
+
+            self.cancel = self.after(self.delay, self.play)
+        else:
+            img = ImageTk.PhotoImage(self.scale_image(im.convert('RGBA')))
+            tk.Label.__init__(self, master, image=img, *args, **kwargs)
+            self.image = img
+
+    def play(self):
+        self.config(image=self.frames[self.idx])
+        self.idx += 1
+        if self.idx == len(self.frames):
+            self.idx = 0
+        self.cancel = self.after(self.delay, self.play)
+
+    def scale_image(self, image):
+        width, height = image.size
+        new_size = (int(width*self.scale), int(height*self.scale))
+        return image.resize(new_size, pyImage.ANTIALIAS)
+
+
 def file_path(relative_path):
     if hasattr(sys, '_MEIPASS'):
         return os.path.join(sys._MEIPASS, relative_path)
@@ -266,6 +321,7 @@ def popuptest():
     pop = Popup()
     center_popup(pop, app)
 
+
 app = Main()
 frame = Frame(app)
 menubar = Menu(app)
@@ -276,8 +332,9 @@ menu.add_separator()
 menu.add_command(label="Exit", command=sys.exit)
 app.config(menu=menubar)
 label = Label(frame, text="Labels look like this")
+gif = Image(frame, file_path('logo.png'), scale=.5)
 button1 = Button(frame, text="Test Button 1", command=popuptest)
-button2 = Button(frame, text="clipboard copy", command=lambda: clip(app, entry.get()))
+button2 = Button(frame, text="clipboard copy", command=gif.play)
 text = Text(frame, width=20, height=2)
 text.insert("1.0", "This is a text widget")
 entry = Entry(frame, width=15)
@@ -304,6 +361,6 @@ radio1.pack()
 radio2.pack()
 check1.pack()
 check2.pack()
+gif.pack()
 
-app.mainloop()
-'''
+app.mainloop()'''
