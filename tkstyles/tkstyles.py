@@ -322,8 +322,10 @@ def set_theme(theme_name):
 def popuptest():
     pop = Popup()
     center_popup(pop, app)
+    
 
 app = Main()
+set_theme('purple')
 frame = Frame(app)
 menubar = Menu(app)
 menu = Menu(menubar, tearoff=0)
@@ -333,9 +335,8 @@ menu.add_separator()
 menu.add_command(label="Exit", command=sys.exit)
 app.config(menu=menubar)
 label = Label(frame, text="Labels look like this")
-gif = Image(frame, file_path('doog.gif'), scale=.5)
 button1 = Button(frame, text="Test Button 1", command=popuptest)
-button2 = Button(frame, text="clipboard copy", command=gif.play)
+button2 = Button(frame, text="clipboard copy")
 text = Text(frame, width=20, height=2)
 text.insert("1.0", "This is a text widget")
 entry = Entry(frame, width=15)
@@ -362,6 +363,5 @@ radio1.pack()
 radio2.pack()
 check1.pack()
 check2.pack()
-gif.pack()
 
 app.mainloop()'''
