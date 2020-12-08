@@ -8,7 +8,7 @@ setup(
   author = 'Kevin Lusignolo',                   # Type in your name
   author_email='kevinlusignolo@gmail.com',      # Type in your E-Mail
   url='https://github.com/klusignolo/tkstyles',   # Provide either the link to your github or to your website
-  download_url='https://github.com/klusignolo/tkstyles/archive/2.1.4.tar.gz',    # I explain this later on
+  download_url='https://github.com/klusignolo/tkstyles/archive/v2.1.4.tar.gz',    # I explain this later on
   keywords=['tkinter', 'style', 'theme'],   # Keywords that define your package best
   install_requires=[],
   classifiers=[
