@@ -16,12 +16,6 @@ tkstyles can be installed using regular pip. There are no dependencies as the mo
 pip install tkstyles
 
 
-### Todos
-
- - Add more themes.
- - Add possible support for certain ttk widgets.
- - Figure out a function to swap the theme within apps.
-
 ### Sample App:
 from tkstyles import *
 

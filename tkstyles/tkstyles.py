@@ -1,214 +1,110 @@
 import tkinter as tk
 import sys
 import os
-from PIL import ImageTk, Image as pyImage
+from themes import Themes, Theme
 
-theme = 14
-
-# ********************** Theme Names *********************
-# 0: "Green"
-# 1: "Dark"
-# 2: "Blue"
-# 3: "Love" or "Pink"
-# 4: "Yellow"
-# 5: "Hufflepuff"
-# 6: "Gryffindor"
-# 7: "Slytherin"
-# 8: "Ravenclaw"
-# 9: "Red"
-# 10: "Purple"
-# 11: "Gold"
-# 12: "HCSS"
-# 13: "Black and White"
-# 14: "Light"
-# ********************************************************
-
-# The Main and Frame background.
-background = ["#f2fff9", "#191919", "#5895fc", "#ff3f79", "#fffef2", '#dcab20', '#5c0000', '#2a623d', '#222f5b',
-              "#cf0202", "#b48efa", "#ffaf2d", "#117011", "#000000", "#ffffff"]
-# The Button background.
-bbackground = ["#dcede0", "#232323", "#2e62f2", "#e81253", "#efe2d0", '#181818', '#fb8800', '#474747', '#946b2d',
-               "#b30000", "#e7d3ff", "#ffb005", "#2f912f", "#ffffff", "#b3f2ff"]
-# The Button's Hover background
-hbackground = ['#23e046', '#0c0c0c', '#023bd9', "#ce002c", "#ffd52d", '#535353', '#fbb100', '#1a472a', '#9a610a',
-               '#ed1818', '#9c38ff', "#ff9800", "#117011", "#ededed", "#d1f7ff"]
-# The Entry and Text background
-ebackground = ['#d9ffd8', '#474747', '#5e89ff', "#fca9c2", "#fff7d8", "#feeb9f", '#ab4e4e', '#8ddaa7', '#a98957',
-               '#eb4444', '#d8a1ff', "#f7be4a", "#ffffff", "#ffffff", "#e0faff"]
-# The Disabled Entry background.
-dbackground = ['#d2efe4', '#0c0c0c', '#b8c8f5', "#e5d0d7", "#f2eede", "#fceaaa", '#936a6a', '#add0b9', '#ad9673',
-               '#de9999', '#eed9f9', "#edc572", "#ededed", "#ededed", "#ffffff"]
-# The Radiobutton/Checkbox background
-rbackground = ['#d9ffd8', '#474747', '#5e89ff', "#fca9c2", "#fff7d8", "#feeb9f", '#ab4e4e', '#8ddaa7', '#ad9673',
-               '#eb4444', '#d8a1ff', "#f7be4a", "#474747", "#474747", "#e0faff"]
-# The default Font color
-fontcolor = ["#242624", "#efefef", "#000000", "#440014", "#262524", "#1c1c1c", '#d08400', '#000000', '#b8740e',
-             "#000000", "#000000", "#4d2e00", "#ffffff", "#ffffff", "#000000"]
-# The default Button font color
-bfontcolor = ["#242624", "#efefef", "#ffffff", "#440014", "#262524", "#f0e095", '#3c0101', '#d3e4d3', '#08143a',
-              "#000000", "#000000", "#4d2e00", "#ffffff", "#000000", "#000000"]
-# The default Entry font color
-efontcolor = ["#242624", "#efefef", "#000000", "#440014", "#262524", "#1c1c1c", '#3c0101', '#000000', '#060c1f',
-              "#000000", "#000000", "#4d2e00", "#000000", "#000000", "#000000"]
-
+THEME: Theme = Themes.LIGHT
 
 class Main(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
-        Main.configure(self, bg=background[theme])
+        Main.configure(self, bg=THEME.background)
 
-        # This chunk is for centering the app within the window when it's launched.
         center_window(self)
 
 
 class Frame(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
-        Frame.configure(self, bg=background[theme])
+        Frame.configure(self, bg=THEME.background)
 
 
 class Toplevel(tk.Toplevel):
     def __init__(self):
         tk.Toplevel.__init__(self)
-        self.configure(bg=background[theme])
+        self.configure(bg=THEME.background)
 
 
 class Button(tk.Button):
     def __init__(self, master, **kwargs):
         tk.Button.__init__(self, master=master, **kwargs)
-        self.defaultBackground = bbackground
+        self.defaultBackground = THEME.button_background
         # This is the hover effect. Binds mouse entry to a function that swaps bg.
         self.bind("<Enter>", self.on_enter)
         self.bind("<Leave>", self.on_leave)
-        self.configure(bg=bbackground[theme], fg=bfontcolor[theme], activebackground=bbackground[theme],
-                       activeforeground=bfontcolor[theme], bd=2, relief='groove')
+        self.configure(bg=THEME.button_background, fg=THEME.button_font_color, activebackground=THEME.button_background,
+                       activeforeground=THEME.button_font_color, bd=2, relief='groove')
 
-    # Sets the background to the hover color when mouse is over btn. Doesn't work for disabled buttons.
     def on_enter(self, e):
+        """Sets the background to the hover color when mouse is over btn. Doesn't work for disabled buttons."""
         if self['state'] == 'normal':
-            self['background'] = hbackground[theme]
+            self['background'] = THEME.button_hover_background
 
-    # Sets the background back to default background when mouse leaves.
     def on_leave(self, e):
-        self['background'] = bbackground[theme]
+        """Sets the background back to default background when mouse leaves."""
+        self['background'] = THEME.button_background
 
 
 class Text(tk.Text):
     def __init__(self, master, **kwargs):
         tk.Text.__init__(self, master=master, **kwargs)
-        self.config(bg=ebackground[theme], fg=efontcolor[theme], insertbackground=efontcolor[theme],
+        self.config(bg=THEME.entry_background, fg=THEME.entry_font_color, insertbackground=THEME.entry_font_color,
                     bd=2, wrap='word')
 
 
 class Entry(tk.Entry):
     def __init__(self, master, **kwargs):
         tk.Entry.__init__(self, master=master, **kwargs)
-        self.config(bg=ebackground[theme], disabledbackground=dbackground[theme], fg=efontcolor[theme],
-                    insertbackground=efontcolor[theme])
+        self.config(bg=THEME.entry_background, disabledbackground=THEME.disabled_entry_background, fg=THEME.entry_font_color,
+                    insertbackground=THEME.entry_font_color)
 
 
 class Label(tk.Label):
     def __init__(self, master, **kwargs):
         tk.Label.__init__(self, master=master, **kwargs)
-        self.configure(bg=background[theme], fg=fontcolor[theme])
+        self.configure(bg=THEME.background, fg=THEME.font_color)
 
 
 class Radio(tk.Radiobutton):
     def __init__(self, master, **kwargs):
         tk.Radiobutton.__init__(self, master=master, **kwargs)
-        self.configure(bg=background[theme], fg=fontcolor[theme], anchor='w',
-                       selectcolor=rbackground[theme])
+        self.configure(bg=THEME.background, fg=THEME.font_color, anchor='w',
+                       selectcolor=THEME.radio_checkbox_background)
 
 
 class Checkbutton(tk.Checkbutton):
     def __init__(self, master, **kwargs):
         tk.Checkbutton.__init__(self, master=master, **kwargs)
-        self.configure(bg=background[theme], fg=fontcolor[theme], anchor='w',
-                       selectcolor=rbackground[theme])
+        self.configure(bg=THEME.background, fg=THEME.font_color, anchor='w',
+                       selectcolor=THEME.radio_checkbox_background)
 
 
 class Scrollbar(tk.Scrollbar):
     def __init__(self, master, **kwargs):
         tk.Scrollbar.__init__(self, master=master, **kwargs)
-        self.configure(bg=ebackground[theme], troughcolor=background[theme])
+        self.configure(bg=THEME.entry_background, troughcolor=THEME.background)
 
 
 class Menu(tk.Menu):
     def __init__(self, master, **kwargs):
         tk.Menu.__init__(self, master=master, **kwargs)
-        self.configure(bg=ebackground[theme], fg=efontcolor[theme], activebackground=hbackground[theme],
-                       activeforeground=bfontcolor[theme])
+        self.configure(bg=THEME.entry_background, fg=THEME.entry_font_color, activebackground=THEME.button_hover_background,
+                       activeforeground=THEME.button_font_color)
 
 
 class OptionMenu(tk.OptionMenu):
     def __init__(self, variable, *args, **kwargs):
         tk.OptionMenu.__init__(self, variable, *args, **kwargs)
-        self.configure(background=bbackground[theme], fg=bfontcolor[theme], activebackground=hbackground[theme],
-                       activeforeground=bfontcolor[theme])
-        self['menu'].configure(background=bbackground[theme], fg=bfontcolor[theme], activebackground=hbackground[theme],
-                               activeforeground=bfontcolor[theme])
+        self.configure(background=THEME.button_background, fg=THEME.button_font_color, activebackground=THEME.button_hover_background,
+                       activeforeground=THEME.button_font_color)
+        self['menu'].configure(background=THEME.button_background, fg=THEME.button_font_color, activebackground=THEME.button_hover_background,
+                               activeforeground=THEME.button_font_color)
 
 
 class Popup(tk.Toplevel):
     def __init__(self, *args, **kwargs):
         tk.Toplevel.__init__(self, *args, **kwargs)
-        self.config(bg=background[theme], padx=10, pady=10)
-
-
-# Credit to https://stackoverflow.com/questions/7960600/python-tkinter-display-animated-gif-using-pil
-# for the implementation of gifs in Tkinter.
-class Image(tk.Label):
-    def __init__(self, master, filename, scale=1.0, *args, **kwargs):
-        self.scale = scale
-        im = pyImage.open(filename)
-        split_file = filename.split('.')
-        file_extension = split_file[len(split_file)-1]
-        if file_extension == 'gif':
-            seq = []
-            try:
-                while 1:
-                    seq.append(self.scale_image(im.copy()))
-                    im.seek(len(seq))  # skip to next frame
-            except EOFError:
-                pass  # ran out of frames
-
-            try:
-                self.delay = im.info['duration']
-                if self.delay == 0:
-                    self.delay = 100
-            except KeyError:
-                self.delay = 100
-
-            first = seq[0].convert('RGBA')
-            self.frames = [ImageTk.PhotoImage(first)]
-
-            tk.Label.__init__(self, master, image=self.frames[0], *args, **kwargs)
-
-            temp = seq[0]
-            for image in seq[1:]:
-                temp.paste(image)
-                frame = temp.convert('RGBA')
-                self.frames.append(ImageTk.PhotoImage(frame))
-
-            self.idx = 0
-
-            self.cancel = self.after(self.delay, self.play)
-        else:
-            img = ImageTk.PhotoImage(self.scale_image(im.convert('RGBA')))
-            tk.Label.__init__(self, master, image=img, *args, **kwargs)
-            self.image = img
-
-    def play(self):
-        self.config(image=self.frames[self.idx])
-        self.idx += 1
-        if self.idx == len(self.frames):
-            self.idx = 0
-        self.cancel = self.after(self.delay, self.play)
-
-    def scale_image(self, image):
-        width, height = image.size
-        new_size = (int(width*self.scale), int(height*self.scale))
-        return image.resize(new_size, pyImage.ANTIALIAS)
+        self.config(bg=THEME.background, padx=10, pady=10)
 
 
 def file_path(relative_path):
@@ -217,8 +113,9 @@ def file_path(relative_path):
     return os.path.join(os.path.abspath("."), relative_path)
 
 
-# This method takes the dimensions of the user's screen and adjusts the app to center within those dimensions.
+# 
 def center_window(win):
+    """Take the dimensions of the screen and adjust the app window to center within those dimensions."""
     windowwidth = win.winfo_reqwidth()
     windowheight = win.winfo_reqheight()
     positionright = int(win.winfo_screenwidth() / 3 - windowwidth)
@@ -226,15 +123,15 @@ def center_window(win):
     win.geometry("+{}+{}".format(positionright, positiondown))
 
 
-# This method takes the measurements of the parent Frame and adjusts the popup's geometry to center it.
 def center_popup(pop, parent):
+    """Takes the measurements of the parent Frame and adjusts the popup's geometry to center within it."""
     positionright = int(parent.winfo_rootx()) + int(parent.winfo_width() / 3)
     positiondown = int(parent.winfo_rooty())
     pop.geometry("+{}+{}".format(positionright, positiondown))
 
 
-# Takes updates the widget's text to equal whatever Value is specified.
 def update(widget, value):
+    """Takes updates the widget's text to equal whatever Value is specified."""
     if isinstance(widget, Entry):
         if widget.cget("state") == "disabled":
             widget.config(state="normal")
@@ -257,8 +154,8 @@ def update(widget, value):
         widget.config(text=value)
 
 
-# Increments an Entry or Label widget by a designated amount. The value MUST be an integer.
-def increment(widget, amount):
+def increment(widget, amount: int):
+    """Increments an Entry or Label widget by a designated amount. The value MUST be an integer."""
     if isinstance(widget, Entry):
         new_entry = int(widget.get()) + amount
         update(widget, str(new_entry))
@@ -267,8 +164,8 @@ def increment(widget, amount):
         widget.configure(text=new_label)
 
 
-# This Function clears out a Tkinter Entry, but does not insert a new value.
 def clear(*widgets):
+    """Clears out the text from any Entry, Text, or Label widget."""
     for widget in widgets:
         if isinstance(widget, Entry):
             widget.delete(0, tk.END)
@@ -278,43 +175,15 @@ def clear(*widgets):
             widget.config(text='')
 
 
-def clip(main, cliptext):
+def clip(main: tk.Tk, cliptext: str):
+    """Append text to the clipboard"""
     tk.Tk.clipboard_clear(main)
     tk.Tk.clipboard_append(main, cliptext)
 
 
-def set_theme(theme_name):
-    global theme
-    if theme_name.lower() == 'green':
-        theme = 0
-    if theme_name.lower() == 'dark':
-        theme = 1
-    if theme_name.lower() == 'blue':
-        theme = 2
-    if theme_name.lower() == 'love' or theme_name.lower() == 'pink':
-        theme = 3
-    if theme_name.lower() == 'yellow':
-        theme = 4
-    if theme_name.lower() == 'hufflepuff':
-        theme = 5
-    if theme_name.lower() == 'gryffindor':
-        theme = 6
-    if theme_name.lower() == 'slytherin':
-        theme = 7
-    if theme_name.lower() == 'ravenclaw':
-        theme = 8
-    if theme_name.lower() == 'red':
-        theme = 9
-    if theme_name.lower() == 'purple':
-        theme = 10
-    if theme_name.lower() == 'gold':
-        theme = 11
-    if theme_name.lower() == 'hcss':
-        theme = 12
-    if theme_name.lower() == 'black and white':
-        theme = 13
-    if theme_name.lower() == 'light':
-        theme = 14
+def set_theme(theme: Theme):
+    global THEME
+    THEME = theme
 
 
 '''
@@ -325,7 +194,7 @@ def popuptest():
     
 
 app = Main()
-set_theme('purple')
+set_theme(Themes.LIGHT)
 frame = Frame(app)
 menubar = Menu(app)
 menu = Menu(menubar, tearoff=0)
@@ -364,4 +233,5 @@ radio2.pack()
 check1.pack()
 check2.pack()
 
-app.mainloop()'''
+app.mainloop()
+'''
