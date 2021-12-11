@@ -3,4 +3,5 @@ README.txt
 setup.cfg
 setup.py
 tkstyles\__init__.py
+tkstyles\themes.py
 tkstyles\tkstyles.py
