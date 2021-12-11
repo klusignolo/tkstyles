@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from enum import Enum
 
 @dataclass
-class Theme():
+class ThemeConfig():
     background: str
     button_background: str
     button_hover_background: str
@@ -26,8 +26,8 @@ class Color(Enum):
     LIGHT_TEXT = "#F0F0F0"
     DISABLED_LIGHT_TEXT = "#B9B9BC"
 
-class Themes:
-    RED = Theme(
+class Theme:
+    RED = ThemeConfig(
         background=Color.FREE_SPEECH_RED.value,
         button_background=Color.DARK_RED.value,
         button_hover_background=Color.RED.value,
@@ -38,7 +38,7 @@ class Themes:
         button_font_color=Color.DARK_TEXT.value, 
         entry_font_color=Color.DARK_TEXT.value
         )
-    GREEN = Theme(
+    GREEN = ThemeConfig(
         background="#f2fff9",
         button_background="#dcede0",
         button_hover_background="#23e046",
@@ -49,7 +49,7 @@ class Themes:
         button_font_color="#242624", 
         entry_font_color="#242624"
         )
-    BLUE = Theme(
+    BLUE = ThemeConfig(
         background="#5895fc",
         button_background="#2e62f2",
         button_hover_background="#023bd9",
@@ -60,7 +60,7 @@ class Themes:
         button_font_color=Color.LIGHT_TEXT.value, 
         entry_font_color=Color.DARK_TEXT.value
         )
-    YELLOW = Theme(
+    YELLOW = ThemeConfig(
         background="#fffef2",
         button_background="#efe2d0",
         button_hover_background="#ffd52d",
@@ -71,7 +71,7 @@ class Themes:
         button_font_color="#262524", 
         entry_font_color="#262524"
         )
-    PINK = Theme(
+    PINK = ThemeConfig(
         background="#ff3f79",
         button_background="#e81253",
         button_hover_background="#ce002c",
@@ -82,7 +82,7 @@ class Themes:
         button_font_color="#440014", 
         entry_font_color="#440014"
         )
-    PURPLE = Theme(
+    PURPLE = ThemeConfig(
         background="#b48efa",
         button_background="#e7d3ff",
         button_hover_background="#9c38ff",
@@ -93,7 +93,7 @@ class Themes:
         button_font_color=Color.DARK_TEXT.value, 
         entry_font_color=Color.DARK_TEXT.value
         )
-    GOLD = Theme(
+    GOLD = ThemeConfig(
         background="#ffaf2d",
         button_background="#ffb005",
         button_hover_background="#ff9800",
@@ -104,7 +104,7 @@ class Themes:
         button_font_color="#4d2e00", 
         entry_font_color="#4d2e00"
         )
-    DARK = Theme(
+    DARK = ThemeConfig(
         background="#191919",
         button_background="#232323",
         button_hover_background="#0c0c0c",
@@ -115,7 +115,7 @@ class Themes:
         button_font_color="#efefef", 
         entry_font_color="#efefef"
         )
-    LIGHT = Theme(
+    LIGHT = ThemeConfig(
         background=Color.WHITE.value,
         button_background="#b3f2ff",
         button_hover_background="#d1f7ff",
@@ -126,7 +126,7 @@ class Themes:
         button_font_color=Color.DARK_TEXT.value, 
         entry_font_color=Color.DARK_TEXT.value
         )
-    BLACK_AND_WHITE = Theme(
+    BLACK_AND_WHITE = ThemeConfig(
         background=Color.BLACK.value,
         button_background=Color.WHITE.value,
         button_hover_background="#ededed",
@@ -137,7 +137,7 @@ class Themes:
         button_font_color=Color.DARK_TEXT.value, 
         entry_font_color=Color.DARK_TEXT.value
         )
-    HUFFLEPUFF = Theme(
+    HUFFLEPUFF = ThemeConfig(
         background="#dcab20",
         button_background="#181818",
         button_hover_background="#535353",
@@ -148,7 +148,7 @@ class Themes:
         button_font_color="#f0e095", 
         entry_font_color="#1c1c1c"
         )
-    GRYFFINDOR = Theme(
+    GRYFFINDOR = ThemeConfig(
         background="#5c0000",
         button_background="#fb8800",
         button_hover_background="#fbb100",
@@ -159,7 +159,7 @@ class Themes:
         button_font_color="#3c0101", 
         entry_font_color="#3c0101"
         )
-    SLYTHERIN = Theme(
+    SLYTHERIN = ThemeConfig(
         background="#2a623d",
         button_background="#474747",
         button_hover_background="#1a472a",
@@ -170,7 +170,7 @@ class Themes:
         button_font_color="#d3e4d3", 
         entry_font_color=Color.DARK_TEXT.value
         )
-    RAVENCLAW = Theme(
+    RAVENCLAW = ThemeConfig(
         background="#222f5b",
         button_background="#946b2d",
         button_hover_background="#9a610a",
