@@ -4,12 +4,12 @@ import os
 from . themes import Theme
 from . themes import ThemeConfig as _tcfg
 
-__THEME: _tcfg = Theme.LIGHT
+_THEME: _tcfg = Theme.LIGHT
 
 class Main(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
-        Main.configure(self, bg=__THEME.background)
+        Main.configure(self, bg=_THEME.background)
 
         center_window(self)
 
@@ -17,95 +17,95 @@ class Main(tk.Tk):
 class Frame(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
-        Frame.configure(self, bg=__THEME.background)
+        Frame.configure(self, bg=_THEME.background)
 
 
 class Toplevel(tk.Toplevel):
     def __init__(self):
         tk.Toplevel.__init__(self)
-        self.configure(bg=__THEME.background)
+        self.configure(bg=_THEME.background)
 
 
 class Button(tk.Button):
     def __init__(self, master, **kwargs):
         tk.Button.__init__(self, master=master, **kwargs)
-        self.defaultBackground = __THEME.button_background
+        self.defaultBackground = _THEME.button_background
         # This is the hover effect. Binds mouse entry to a function that swaps bg.
         self.bind("<Enter>", self.on_enter)
         self.bind("<Leave>", self.on_leave)
-        self.configure(bg=__THEME.button_background, fg=__THEME.button_font_color, activebackground=__THEME.button_background,
-                       activeforeground=__THEME.button_font_color, bd=2, relief='groove')
+        self.configure(bg=_THEME.button_background, fg=_THEME.button_font_color, activebackground=_THEME.button_background,
+                       activeforeground=_THEME.button_font_color, bd=2, relief='groove')
 
     def on_enter(self, e):
         """Sets the background to the hover color when mouse is over btn. Doesn't work for disabled buttons."""
         if self['state'] == 'normal':
-            self['background'] = __THEME.button_hover_background
+            self['background'] = _THEME.button_hover_background
 
     def on_leave(self, e):
         """Sets the background back to default background when mouse leaves."""
-        self['background'] = __THEME.button_background
+        self['background'] = _THEME.button_background
 
 
 class Text(tk.Text):
     def __init__(self, master, **kwargs):
         tk.Text.__init__(self, master=master, **kwargs)
-        self.config(bg=__THEME.entry_background, fg=__THEME.entry_font_color, insertbackground=__THEME.entry_font_color,
+        self.config(bg=_THEME.entry_background, fg=_THEME.entry_font_color, insertbackground=_THEME.entry_font_color,
                     bd=2, wrap='word')
 
 
 class Entry(tk.Entry):
     def __init__(self, master, **kwargs):
         tk.Entry.__init__(self, master=master, **kwargs)
-        self.config(bg=__THEME.entry_background, disabledbackground=__THEME.disabled_entry_background, fg=__THEME.entry_font_color,
-                    insertbackground=__THEME.entry_font_color)
+        self.config(bg=_THEME.entry_background, disabledbackground=_THEME.disabled_entry_background, fg=_THEME.entry_font_color,
+                    insertbackground=_THEME.entry_font_color)
 
 
 class Label(tk.Label):
     def __init__(self, master, **kwargs):
         tk.Label.__init__(self, master=master, **kwargs)
-        self.configure(bg=__THEME.background, fg=__THEME.font_color)
+        self.configure(bg=_THEME.background, fg=_THEME.font_color)
 
 
 class Radio(tk.Radiobutton):
     def __init__(self, master, **kwargs):
         tk.Radiobutton.__init__(self, master=master, **kwargs)
-        self.configure(bg=__THEME.background, fg=__THEME.font_color, anchor='w',
-                       selectcolor=__THEME.radio_checkbox_background)
+        self.configure(bg=_THEME.background, fg=_THEME.font_color, anchor='w',
+                       selectcolor=_THEME.radio_checkbox_background)
 
 
 class Checkbutton(tk.Checkbutton):
     def __init__(self, master, **kwargs):
         tk.Checkbutton.__init__(self, master=master, **kwargs)
-        self.configure(bg=__THEME.background, fg=__THEME.font_color, anchor='w',
-                       selectcolor=__THEME.radio_checkbox_background)
+        self.configure(bg=_THEME.background, fg=_THEME.font_color, anchor='w',
+                       selectcolor=_THEME.radio_checkbox_background)
 
 
 class Scrollbar(tk.Scrollbar):
     def __init__(self, master, **kwargs):
         tk.Scrollbar.__init__(self, master=master, **kwargs)
-        self.configure(bg=__THEME.entry_background, troughcolor=__THEME.background)
+        self.configure(bg=_THEME.entry_background, troughcolor=_THEME.background)
 
 
 class Menu(tk.Menu):
     def __init__(self, master, **kwargs):
         tk.Menu.__init__(self, master=master, **kwargs)
-        self.configure(bg=__THEME.entry_background, fg=__THEME.entry_font_color, activebackground=__THEME.button_hover_background,
-                       activeforeground=__THEME.button_font_color)
+        self.configure(bg=_THEME.entry_background, fg=_THEME.entry_font_color, activebackground=_THEME.button_hover_background,
+                       activeforeground=_THEME.button_font_color)
 
 
 class OptionMenu(tk.OptionMenu):
     def __init__(self, variable, *args, **kwargs):
         tk.OptionMenu.__init__(self, variable, *args, **kwargs)
-        self.configure(background=__THEME.button_background, fg=__THEME.button_font_color, activebackground=__THEME.button_hover_background,
-                       activeforeground=__THEME.button_font_color)
-        self['menu'].configure(background=__THEME.button_background, fg=__THEME.button_font_color, activebackground=__THEME.button_hover_background,
-                               activeforeground=__THEME.button_font_color)
+        self.configure(background=_THEME.button_background, fg=_THEME.button_font_color, activebackground=_THEME.button_hover_background,
+                       activeforeground=_THEME.button_font_color)
+        self['menu'].configure(background=_THEME.button_background, fg=_THEME.button_font_color, activebackground=_THEME.button_hover_background,
+                               activeforeground=_THEME.button_font_color)
 
 
 class Popup(tk.Toplevel):
     def __init__(self, *args, **kwargs):
         tk.Toplevel.__init__(self, *args, **kwargs)
-        self.config(bg=__THEME.background, padx=10, pady=10)
+        self.config(bg=_THEME.background, padx=10, pady=10)
 
 
 def file_path(relative_path):
@@ -183,16 +183,16 @@ def clip(main: tk.Tk, cliptext: str):
 
 
 def set_theme(theme: Theme):
-    global __THEME
-    __THEME = theme
+    global _THEME
+    _THEME = theme
 
 
+'''
 # Display of all modules for theme building
 def popuptest():
     pop = Popup()
     center_popup(pop, app)
     
-'''
 app = Main()
 set_theme(Theme.DARK)
 frame = Frame(app)
