@@ -3,50 +3,47 @@
 
 tkstyles is a small library designed to work with the native tkinter gui development library. The classes are all tkinter widgets with the ability to declare a theme. Each theme will adjust the color scheme of widgets at the same time. I purposefully did not let themes change any text style aside from color.
 
-  - import tkstyles (no need to import tkinter as well)
-  - set_theme("hufflepuff")
-  - Declare, grid, and pack your widgets.
+  - import tkstyles
+  - set_theme(THEMES.Hufflepuff)
+  - Declare, grid, and pack widgets.
   - Magic.
-
 
 
 ### Installation
 tkstyles can be installed using regular pip. There are no dependencies as the module only relies on what comes native to Python.
 
+```python
 pip install tkstyles
-
-
-### Todos
-
- - Add more themes.
- - Add possible support for certain ttk widgets.
- - Figure out a function to swap the theme within apps.
+```
 
 ### Sample App:
-from tkstyles import *
+```python
+import tkstyles as ui
+import sys 
 
-app = Main()
-frame = Frame(app)
+app = ui.Main()
+frame = ui.Frame(app)
+ui.set_theme(ui.Theme.BLUE)
 
-menubar = Menu(app)
-menu = Menu(menubar, tearoff=0)
+menubar = ui.Menu(app)
+menu = ui.Menu(menubar, tearoff=0)
 menubar.add_cascade(label="The Menu", menu=menu)
 menu.add_command(label="Exit", command=sys.exit)
 app.config(menu=menubar)
 
-label = Label(frame, text="Labels look like this")
+label = ui.Label(frame, text="Labels look like this")
 
-button = Button(frame, text="This is a button")
+button = ui.Button(frame, text="This is a button")
 
-text = Text(frame, width=20, height=2)
+text = ui.Text(frame, width=20, height=2)
 text.insert("1.0", "This is a text widget")
 
-entry = Entry(frame, width=15)
+entry = ui.Entry(frame, width=15)
 entry.insert(0, "Entry")
 
-variable = tk.StringVar(app)
+variable = ui.tk.StringVar(app)
 variable.set("one")
-optionmenu = OptionMenu(frame, variable, "one", "two", "three")
+optionmenu = ui.OptionMenu(frame, variable, "one", "two", "three")
 
 frame.pack()
 label.pack()
@@ -56,7 +53,7 @@ entry.pack()
 optionmenu.pack()
 
 app.mainloop()
-
+```
 
 
 License
